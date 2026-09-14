@@ -1,0 +1,35 @@
+[
+  {
+    "id": "chuong00",
+    "ten": "00. Một số lưu ý về tính toán",
+    "icon": "📐",
+    "chuDe": [
+      { "id": "topic-01", "so": 1, "ten": "Chữ số có nghĩa" },
+      { "id": "topic-02", "so": 2, "ten": "Thứ nguyên và đơn vị" }
+    ]
+  },
+  {
+    "id": "chuong01",
+    "ten": "01. Cấu tạo nguyên tử",
+    "icon": "⚛️",
+    "chuDe": [
+      { "id": "topic-03", "so": 3, "ten": "Thí nghiệm khám phá electron của Thomson" },
+      { "id": "topic-04", "so": 4, "ten": "Thí nghiệm giọt dầu của Millikan" },
+      { "id": "topic-05", "so": 5, "ten": "Thí nghiệm khám phá hạt nhân của Rutherford" },
+      { "id": "topic-06", "so": 6, "ten": "Mô hình nguyên tử của Rutherford - Bohr" },
+      { "id": "topic-07", "so": 7, "ten": "Mô hình hiện đại về nguyên tử" }
+    ]
+  },
+  {
+    "id": "chuong02",
+    "ten": "02. Liên kết hóa học",
+    "icon": "🧪",
+    "chuDe": [
+      { "id": "topic-08", "so": 8, "ten": "Liên kết ion" },
+      { "id": "topic-09", "so": 9, "ten": "Công thức Lewis" },
+      { "id": "topic-10", "so": 10, "ten": "Độ âm điện" },
+      { "id": "topic-11", "so": 11, "ten": "Orbital lai hóa" },
+      { "id": "topic-12", "so": 12, "ten": "Thuyết MO" }
+    ]
+  }
+]

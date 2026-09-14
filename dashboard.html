@@ -3,29 +3,39 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Danh sách chương</title>
+<title>Hóa Chuyên Online</title>
 <link rel="stylesheet" href="css/style.css" />
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"], ["$$", "$$"]] },
+    options: { skipHtmlTags: ["script","noscript","style","textarea","pre","code"] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-    <a href="dashboard.html" class="brand" id="brand">Trang chủ</a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Mở danh sách chương">☰</button>
+      <a href="dashboard.html" class="brand" id="brand">Trang chủ</a>
+    </div>
     <div class="user-box">
       <span id="user-name"></span>
       <button class="logout" onclick="logout()">Đăng xuất</button>
     </div>
   </header>
 
-  <div class="container">
-    <h2 class="page-title">Danh sách chương học</h2>
-    <p class="page-desc">Chọn một chương để xem lý thuyết, bài tập minh họa và bài tập tự luyện.</p>
-
-    <div class="chapter-grid" id="chapter-grid">
+  <div class="app-shell">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <nav class="sidebar" id="sidebar"></nav>
+    <main class="content-area" id="content-area">
       <div class="loading">Đang tải...</div>
-    </div>
+    </main>
   </div>
 
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
   <script>
     const session = requireLogin();
     if (session) {
@@ -33,30 +43,7 @@
     }
     document.getElementById("brand").textContent = SITE_NAME;
     document.title = SITE_NAME;
-
-    fetch("data/chapters.json")
-      .then((r) => r.json())
-      .then((chapters) => {
-        const grid = document.getElementById("chapter-grid");
-        grid.innerHTML = "";
-        chapters.forEach((ch) => {
-          const a = document.createElement("a");
-          a.className = "chapter-item";
-          a.href = `lesson.html?id=${encodeURIComponent(ch.id)}`;
-          a.innerHTML = `
-            <div>
-              <div class="ch-name">${ch.ten}</div>
-              <div class="ch-sub">${ch.moTa || ""}</div>
-            </div>
-            <div class="ch-arrow">→</div>
-          `;
-          grid.appendChild(a);
-        });
-      })
-      .catch(() => {
-        document.getElementById("chapter-grid").innerHTML =
-          '<div class="loading">Không tải được danh sách chương.</div>';
-      });
+    initApp();
   </script>
 </body>
 </html>
