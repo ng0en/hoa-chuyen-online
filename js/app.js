@@ -120,10 +120,18 @@ function loadTopic(topicId) {
           <textarea class="notes-area" id="notes-area" placeholder="Ghi chú riêng của em về bài học này...">${savedNotes}</textarea>
           <div class="notes-hint">Ghi chú được lưu tự động trên trình duyệt này (không gửi cho giáo viên).</div>
         </div>
+
+        <div class="report-section">
+          <button class="report-link-btn" id="report-open-btn">🚩 Báo lỗi nội dung ở chủ đề này</button>
+        </div>
       `;
 
       document.getElementById("notes-area").addEventListener("input", (e) => {
         localStorage.setItem(notesKey, e.target.value);
+      });
+
+      document.getElementById("report-open-btn").addEventListener("click", () => {
+        openReportModal(topicId, `Chủ đề ${meta.chuDe.so}: ${data.tieuDe}`);
       });
 
       typesetMath();
@@ -168,7 +176,88 @@ function initSidebarToggle() {
   overlay.addEventListener("click", closeSidebarOnMobile);
 }
 
+// ---------- Modal báo lỗi nội dung ----------
+let REPORT_TOPIC_ID = null;
+
+function openReportModal(topicId, topicLabel) {
+  REPORT_TOPIC_ID = topicId;
+  document.getElementById("report-topic-name").textContent = topicLabel;
+  document.getElementById("report-text").value = "";
+  const msg = document.getElementById("report-msg");
+  msg.textContent = "";
+  msg.className = "modal-msg";
+  document.getElementById("report-overlay").classList.add("show");
+  document.getElementById("report-text").focus();
+}
+
+function closeReportModal() {
+  document.getElementById("report-overlay").classList.remove("show");
+}
+
+function submitReport() {
+  const text = document.getElementById("report-text").value.trim();
+  const msg = document.getElementById("report-msg");
+
+  if (!text) {
+    msg.textContent = "Vui lòng nhập nội dung lỗi.";
+    msg.className = "modal-msg error";
+    return;
+  }
+  if (APPS_SCRIPT_URL.includes("DAN_LINK_APPS_SCRIPT_VAO_DAY")) {
+    msg.textContent = "Chưa cấu hình xong máy chủ, không gửi được lúc này.";
+    msg.className = "modal-msg error";
+    return;
+  }
+
+  const session = getSession();
+  const submitBtn = document.getElementById("report-submit");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Đang gửi...";
+
+  const meta = findTopicMeta(REPORT_TOPIC_ID);
+  const chuDeTen = meta ? `Chủ đề ${meta.chuDe.so}: ${meta.chuDe.ten}` : REPORT_TOPIC_ID;
+
+  jsonpRequest(APPS_SCRIPT_URL, {
+    action: "baoloi",
+    chuDeId: REPORT_TOPIC_ID,
+    chuDeTen,
+    email: (session && session.email) || "",
+    noiDung: text,
+  })
+    .then((res) => {
+      if (res && res.success) {
+        msg.textContent = "Đã gửi, cảm ơn em!";
+        msg.className = "modal-msg ok";
+        setTimeout(closeReportModal, 1200);
+      } else {
+        msg.textContent = (res && res.message) || "Gửi không thành công, thử lại sau.";
+        msg.className = "modal-msg error";
+      }
+    })
+    .catch((err) => {
+      msg.textContent = err.message || "Có lỗi xảy ra, thử lại sau.";
+      msg.className = "modal-msg error";
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Gửi báo lỗi";
+    });
+}
+
+function initReportModal() {
+  const cancelBtn = document.getElementById("report-cancel");
+  const submitBtn = document.getElementById("report-submit");
+  const overlay = document.getElementById("report-overlay");
+  if (!overlay) return;
+  cancelBtn.addEventListener("click", closeReportModal);
+  submitBtn.addEventListener("click", submitReport);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeReportModal();
+  });
+}
+
 function initApp() {
+  initReportModal();
   initSidebarToggle();
   fetch("data/structure.json")
     .then((r) => r.json())
