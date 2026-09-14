@@ -15,4 +15,11 @@
   window.addEventListener("beforeprint", () => {
     document.title = "Không thể in trang này";
   });
+
+  // Chặn kéo (drag) ảnh/văn bản ra ngoài trang trong khu vực nội dung
+  document.addEventListener("dragstart", (e) => {
+    if (e.target.closest && e.target.closest(".content-area")) {
+      e.preventDefault();
+    }
+  });
 })();

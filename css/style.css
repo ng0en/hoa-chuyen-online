@@ -304,6 +304,25 @@ p.page-desc { color: var(--muted); margin-top: 0; }
 }
 .btn-secondary:hover { background: #f3f4f6; }
 
+/* ---------- Chặn bôi đen / kéo (drag) nội dung ---------- */
+.content-area {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.content-area img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none; /* không kéo/click-giữ được ảnh */
+}
+/* Vẫn cho phép bôi đen/gõ bình thường trong các ô nhập liệu */
+.content-area textarea,
+.content-area input {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+}
+
 /* ---------- Chặn in trang ---------- */
 @media print {
   body * { display: none !important; }
