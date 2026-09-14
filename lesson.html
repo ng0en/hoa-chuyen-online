@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bài học</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="dashboard.html" class="brand" id="brand">Trang chủ</a>
+    <div class="user-box">
+      <span id="user-name"></span>
+      <button class="logout" onclick="logout()">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div class="container" id="lesson-body">
+    <a href="dashboard.html" class="back-link">← Quay lại danh sách chương</a>
+    <h2 class="page-title" id="lesson-title">Đang tải...</h2>
+
+    <div class="section-block">
+      <div class="section-title"><span class="tag">1</span> Lý thuyết</div>
+      <div class="theory-content" id="theory-content"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-title"><span class="tag">2</span> Bài tập minh họa</div>
+      <div id="illustrated-list"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-title"><span class="tag">3</span> Bài tập tự luyện</div>
+      <div id="practice-list"></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-title"><span class="tag">4</span> Ghi chú của em</div>
+      <textarea class="notes-area" id="notes-area" placeholder="Ghi chú riêng của em về bài học này..."></textarea>
+      <div class="notes-hint">Ghi chú được lưu tự động trên trình duyệt này (không gửi cho giáo viên).</div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/lesson.js"></script>
+  <script>
+    const session = requireLogin();
+    if (session) {
+      document.getElementById("user-name").textContent = "Xin chào, " + session.name;
+    }
+    document.getElementById("brand").textContent = SITE_NAME;
+    loadLesson();
+  </script>
+</body>
+</html>

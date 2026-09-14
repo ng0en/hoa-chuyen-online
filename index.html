@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Đăng nhập</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="center-page">
+    <div class="card login-card">
+      <h1 id="site-title">Đăng nhập</h1>
+      <p class="subtitle">Nhập email và mã đăng nhập giáo viên đã gửi cho bạn qua email.</p>
+
+      <form id="login-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="ten@gmail.com" required />
+
+        <label for="code">Mã đăng nhập</label>
+        <input type="text" id="code" placeholder="Ví dụ: A1B2C3" required autocomplete="off" />
+
+        <button type="submit" class="btn-primary" id="login-submit">Đăng nhập</button>
+
+        <div class="error-msg" id="login-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById("site-title").textContent = SITE_NAME;
+    document.title = SITE_NAME + " — Đăng nhập";
+    initLoginForm();
+  </script>
+</body>
+</html>

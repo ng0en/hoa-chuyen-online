@@ -1,0 +1,28 @@
+{
+  "tieuDe": "Chương 1: Cấu tạo nguyên tử — Mô hình nguyên tử hiện đại",
+  "lyThuyet": "<h3>1. Thành phần cấu tạo nguyên tử</h3><p>Nguyên tử gồm hạt nhân (chứa proton mang điện tích dương và neutron không mang điện) và lớp vỏ electron mang điện tích âm chuyển động xung quanh hạt nhân.</p><ul><li>Proton: điện tích +1, khối lượng ≈ 1 amu</li><li>Neutron: không mang điện, khối lượng ≈ 1 amu</li><li>Electron: điện tích −1, khối lượng rất nhỏ (≈ 1/1840 amu)</li></ul><h3>2. Mô hình nguyên tử hiện đại (mô hình orbital)</h3><p>Theo cơ học lượng tử, electron không chuyển động theo quỹ đạo xác định như mô hình Bohr, mà tồn tại trong các <b>orbital nguyên tử (AO)</b> — vùng không gian xung quanh hạt nhân mà xác suất tìm thấy electron là lớn nhất (khoảng 90%).</p><p>Các phân lớp electron: s, p, d, f ứng với hình dạng orbital khác nhau (s: hình cầu; p: hình số 8 nổi;...).</p><h3>3. Cấu hình electron</h3><p>Nguyên lý sắp xếp electron vào các lớp, phân lớp tuân theo:</p><ul><li>Nguyên lý vững bền (mức năng lượng tăng dần)</li><li>Nguyên lý Pauli (mỗi orbital chứa tối đa 2 electron, spin ngược chiều)</li><li>Quy tắc Hund (electron điền vào các orbital cùng mức năng lượng sao cho số electron độc thân là tối đa)</li></ul><p><i>Đây là nội dung ví dụ — thầy/cô thay bằng nội dung bài giảng thật của mình.</i></p>",
+  "baiTapMinhHoa": [
+    {
+      "de": "Nguyên tử X có tổng số hạt proton, neutron, electron là 34, trong đó số hạt mang điện nhiều hơn số hạt không mang điện là 10. Xác định số proton, neutron của X.",
+      "loiGiai": "Gọi p, n, e lần lượt là số proton, neutron, electron (p = e).<br>Ta có hệ: 2p + n = 34 và 2p − n = 10.<br>Giải hệ: p = 11, n = 12.<br>Vậy X có 11 proton, 12 neutron → X là Natri (Na)."
+    },
+    {
+      "de": "Viết cấu hình electron của nguyên tử có Z = 17 (Clo) và xác định số electron lớp ngoài cùng.",
+      "loiGiai": "Cấu hình electron: 1s² 2s² 2p⁶ 3s² 3p⁵.<br>Lớp ngoài cùng là lớp 3, có 2 + 5 = 7 electron.<br>→ Clo có 7 electron lớp ngoài cùng, là phi kim điển hình."
+    }
+  ],
+  "baiTapTuLuyen": [
+    {
+      "de": "Nguyên tử Y có tổng số hạt là 40, số hạt mang điện gấp đôi số hạt không mang điện. Xác định số proton của Y.",
+      "dapAn": "p = e = 13, n = 14 → Y là Nhôm (Al), Z = 13."
+    },
+    {
+      "de": "Viết cấu hình electron của ion Fe³⁺ (biết Fe có Z = 26).",
+      "dapAn": "Cấu hình Fe: [Ar] 3d⁶ 4s². Khi tạo Fe³⁺, electron bị mất trước ở phân lớp 4s rồi đến 3d: Fe³⁺: [Ar] 3d⁵."
+    },
+    {
+      "de": "Một nguyên tố có 3 lớp electron, lớp ngoài cùng có 6 electron. Xác định số hiệu nguyên tử Z và gọi tên nguyên tố.",
+      "dapAn": "Cấu hình: 1s² 2s² 2p⁶ 3s² 3p⁴ → Z = 16 → nguyên tố là Lưu huỳnh (S)."
+    }
+  ]
+}

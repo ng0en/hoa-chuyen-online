@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Danh sách chương</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="dashboard.html" class="brand" id="brand">Trang chủ</a>
+    <div class="user-box">
+      <span id="user-name"></span>
+      <button class="logout" onclick="logout()">Đăng xuất</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2 class="page-title">Danh sách chương học</h2>
+    <p class="page-desc">Chọn một chương để xem lý thuyết, bài tập minh họa và bài tập tự luyện.</p>
+
+    <div class="chapter-grid" id="chapter-grid">
+      <div class="loading">Đang tải...</div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    const session = requireLogin();
+    if (session) {
+      document.getElementById("user-name").textContent = "Xin chào, " + session.name;
+    }
+    document.getElementById("brand").textContent = SITE_NAME;
+    document.title = SITE_NAME;
+
+    fetch("data/chapters.json")
+      .then((r) => r.json())
+      .then((chapters) => {
+        const grid = document.getElementById("chapter-grid");
+        grid.innerHTML = "";
+        chapters.forEach((ch) => {
+          const a = document.createElement("a");
+          a.className = "chapter-item";
+          a.href = `lesson.html?id=${encodeURIComponent(ch.id)}`;
+          a.innerHTML = `
+            <div>
+              <div class="ch-name">${ch.ten}</div>
+              <div class="ch-sub">${ch.moTa || ""}</div>
+            </div>
+            <div class="ch-arrow">→</div>
+          `;
+          grid.appendChild(a);
+        });
+      })
+      .catch(() => {
+        document.getElementById("chapter-grid").innerHTML =
+          '<div class="loading">Không tải được danh sách chương.</div>';
+      });
+  </script>
+</body>
+</html>
